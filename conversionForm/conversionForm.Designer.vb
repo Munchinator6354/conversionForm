@@ -33,6 +33,7 @@ Partial Class frmConversionForm
         Me.btnExitProgram = New System.Windows.Forms.Button()
         Me.lblInputUnits = New System.Windows.Forms.Label()
         Me.lblEqualsSign = New System.Windows.Forms.Label()
+        Me.lblOutput2 = New System.Windows.Forms.Label()
         Me.SuspendLayout()
         '
         'lblID
@@ -40,10 +41,10 @@ Partial Class frmConversionForm
         Me.lblID.AutoSize = True
         Me.lblID.Location = New System.Drawing.Point(3, 4)
         Me.lblID.Name = "lblID"
-        Me.lblID.Size = New System.Drawing.Size(198, 68)
+        Me.lblID.Size = New System.Drawing.Size(198, 85)
         Me.lblID.TabIndex = 0
         Me.lblID.Text = "Ryan Isaacson" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "CS115 - Fall2020" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Exercise 4 - Feet To Meters" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Exercise 5 - Hours " &
-    "To Minutes"
+    "To Minutes" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Lab 1 - Weight On The Moon"
         '
         'lblConversionOptions
         '
@@ -83,7 +84,7 @@ Partial Class frmConversionForm
         'lblOutput
         '
         Me.lblOutput.AutoSize = True
-        Me.lblOutput.Location = New System.Drawing.Point(314, 230)
+        Me.lblOutput.Location = New System.Drawing.Point(325, 230)
         Me.lblOutput.Name = "lblOutput"
         Me.lblOutput.Size = New System.Drawing.Size(162, 17)
         Me.lblOutput.TabIndex = 7
@@ -109,6 +110,7 @@ Partial Class frmConversionForm
         '
         'btnExitProgram
         '
+        Me.btnExitProgram.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnExitProgram.Location = New System.Drawing.Point(375, 352)
         Me.btnExitProgram.Name = "btnExitProgram"
         Me.btnExitProgram.Size = New System.Drawing.Size(145, 52)
@@ -127,11 +129,21 @@ Partial Class frmConversionForm
         'lblEqualsSign
         '
         Me.lblEqualsSign.AutoSize = True
-        Me.lblEqualsSign.Location = New System.Drawing.Point(276, 230)
+        Me.lblEqualsSign.Location = New System.Drawing.Point(291, 230)
         Me.lblEqualsSign.Name = "lblEqualsSign"
         Me.lblEqualsSign.Size = New System.Drawing.Size(16, 17)
         Me.lblEqualsSign.TabIndex = 6
         Me.lblEqualsSign.Text = "="
+        '
+        'lblOutput2
+        '
+        Me.lblOutput2.AutoSize = True
+        Me.lblOutput2.Location = New System.Drawing.Point(337, 257)
+        Me.lblOutput2.Name = "lblOutput2"
+        Me.lblOutput2.Size = New System.Drawing.Size(170, 17)
+        Me.lblOutput2.TabIndex = 11
+        Me.lblOutput2.Text = "Output2 WIll Appear Here"
+        Me.lblOutput2.Visible = False
         '
         'frmConversionForm
         '
@@ -140,6 +152,7 @@ Partial Class frmConversionForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnExitProgram
         Me.ClientSize = New System.Drawing.Size(800, 450)
+        Me.Controls.Add(Me.lblOutput2)
         Me.Controls.Add(Me.lblEqualsSign)
         Me.Controls.Add(Me.lblInputUnits)
         Me.Controls.Add(Me.btnExitProgram)
@@ -169,4 +182,5 @@ Partial Class frmConversionForm
     Friend WithEvents btnExitProgram As Button
     Friend WithEvents lblInputUnits As Label
     Friend WithEvents lblEqualsSign As Label
+    Friend WithEvents lblOutput2 As Label
 End Class

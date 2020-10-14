@@ -17,24 +17,20 @@ Public Class frmConversionForm
     'Description    Performs calculation for final output based on the number that the user input  
     '               as well as the conversion form that they chose from the provided list.
     Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
-        'Set Up Our Variables Here
-        Dim decInput As Decimal
-        Dim decConversionRate As Decimal
+
+        'Set Up Our variables and types Here
+        Dim decInput, decConversionRate, decUserWeight, decUserMass, decEarthGravAcceleration As Decimal
+        Dim decMoonGravAcceleration, decEarthWeight, decMoonWeight As Decimal
         Dim intConversionRate As Integer
         Dim sngSolution As Single
-        Dim strListBoxOption As String
-        Dim strUnits As String
-        Dim strAnswer As String
-        Dim strFinalConversion As String
-        Dim lngInput As Long
-        Dim lngConversionRate As Long
+        Dim strListBoxOption, strUnits, strAnswer, strFinalConversion, strRemainder As String
+        Dim lngInput, lngConversionRate As Long
         Dim dblRemainder As Double
-        Dim strRemainder As String
 
         'Perform a check to see if the input was a number
-        If IsNumeric(txtInput.Text) Then
+        If Not txtInput.Text.Contains("-") And IsNumeric(txtInput.Text) Then
             'Perform a check to see if a conversion option was selected. 
-            'In a 0 array list box, an index of -1 would mean nothing is selected.
+            'In a 0 index array list box, an index of -1 would mean nothing is selected.
             strListBoxOption = CStr(lstConversionOptions.SelectedIndex)
             'The following line of code was helpful to display to the debug window which conversion option Index# the user chose
             'System.Diagnostics.Debug.Write("User chose conversion index#" & lstConversionOptions.SelectedIndex & vbCrLf)
@@ -46,7 +42,7 @@ Public Class frmConversionForm
                 'This checks which conversion option the user chose and takes the string value and sets it to variable strListBoxOption
             ElseIf CInt(strListBoxOption) >= -1 Then
                 strListBoxOption = lstConversionOptions.SelectedItem.ToString()
-
+                lblOutput2.Text = ""
                 'The following line of code was helpful to display which conversion option string the user chose
                 'System.Diagnostics.Debug.Write("User chose conversion string " & strListBoxOption & vbCrLf)
 
@@ -58,6 +54,7 @@ Public Class frmConversionForm
                     decConversionRate = CDec(0.3048)
                     decInput = CDec(txtInput.Text)
                     sngSolution = (decConversionRate * decInput)
+                    sngSolution = CSng(Math.Round(sngSolution, 2, MidpointRounding.AwayFromZero))
                     strUnits = " Meters"
                     strAnswer = CStr(sngSolution)
                     strFinalConversion = strAnswer & strUnits
@@ -69,6 +66,7 @@ Public Class frmConversionForm
                     decConversionRate = CDec(3.28084)
                     decInput = CDec(txtInput.Text)
                     sngSolution = (decConversionRate * decInput)
+                    sngSolution = CSng(Math.Round(sngSolution, 2, MidpointRounding.AwayFromZero))
                     strUnits = " Feet"
                     strAnswer = CStr(sngSolution)
                     strFinalConversion = strAnswer & strUnits
@@ -100,17 +98,38 @@ Public Class frmConversionForm
                     strRemainder = CStr(dblRemainder)
                     strFinalConversion = strAnswer & strUnits & " and " & strRemainder & " Minutes"
                     '----------------------------------------------------------------------------------------
+
                     'Next the conversion from Earth Weight To Moon Weight
                 ElseIf strListBoxOption = "Earth Weight To Moon Weight" Then
-                    txtInput.Text = ""
-                    lblOutput.Text = "Output Will Appear Here"
-                    MsgBox("This conversion feature is not yet available")
+                    lblInputUnits.Text = "Earth Pounds"
+                    decUserWeight = CDec(txtInput.Text)
+                    decEarthGravAcceleration = CDec(32.2)
+                    decUserMass = decUserWeight / decEarthGravAcceleration
+                    decUserMass = Math.Round(decUserMass, 2, MidpointRounding.AwayFromZero)
+                    lblOutput2.Text = "(" & decUserMass & " slugs (Mass))"
+                    lblOutput2.Show()
+                    System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
+                    decMoonGravAcceleration = CDec(5.3)
+                    decMoonWeight = decUserMass * decMoonGravAcceleration
+                    decMoonWeight = Math.Round(decMoonWeight, 2, MidpointRounding.AwayFromZero)
+                    strFinalConversion = CStr(decMoonWeight) & " Pounds on the Moon "
                     '----------------------------------------------------------------------------------------
+
                     'Next the conversion from Moon Weight To Earth Weight
                 ElseIf strListBoxOption = "Moon Weight To Earth Weight" Then
-                    txtInput.Text = ""
-                    lblOutput.Text = "Output Will Appear Here"
-                    MsgBox("This conversion feature is not yet available")
+                    lblInputUnits.Text = "Moon Pounds"
+                    decUserWeight = CDec(txtInput.Text)
+                    decMoonGravAcceleration = CDec(5.3)
+                    decUserMass = decUserWeight / decMoonGravAcceleration
+                    decUserMass = Math.Round(decUserMass, 2, MidpointRounding.AwayFromZero)
+                    System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
+                    lblOutput2.Text = "(" & decUserMass & " slugs (Mass))"
+                    lblOutput2.Show()
+                    decEarthGravAcceleration = CDec(32.2)
+                    decEarthWeight = decUserMass * decEarthGravAcceleration
+                    decEarthWeight = Math.Round(decEarthWeight, 2, MidpointRounding.AwayFromZero)
+                    strFinalConversion = CStr(decEarthWeight) & " Pounds on the Earth"
+
                     '----------------------------------------------------------------------------------------
                 End If
             End If
@@ -118,10 +137,18 @@ Public Class frmConversionForm
             lblOutput.Text = strFinalConversion
 
         Else
-            'Display's message if user did not input a number
-            MsgBox("Looks like you didn't put in a number buddy...")
+            'Asks user to not input negative numbers (implied by "-" usage)
+            If txtInput.Text.Contains("-") Then
+                MsgBox("No negative numbers buddy...")
+            Else
+                'Display's message prompting user to input a number value
+                MsgBox("Looks like you didn't put in a number buddy...")
+
+            End If
+
         End If
     End Sub
+
     'Subroutine:    btnClear_Click
     'Programmer:    Ryan Isaacson / Munchinator6354
     'Date:          October 12, 2020
@@ -131,9 +158,11 @@ Public Class frmConversionForm
         txtInput.Text = ""
         lblInputUnits.Text = ""
         lblOutput.Text = "Output Will Appear Here"
+        lblOutput2.Text = ""
         lstConversionOptions.SelectedIndex = -1
         txtInput.Focus()
     End Sub
+
     'Subroutine:    btnExitProgram_Click
     'Programmer:    Ryan Isaacson / Munchinator6354
     'Date:          October 12, 2020
