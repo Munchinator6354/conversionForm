@@ -18,7 +18,7 @@ Public Class frmConversionForm
     '               as well as the conversion form that they chose from the provided list.
     Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
 
-        'Set Up Our variables and types Here
+        'Set up our variables and types here
         Dim decInput, decConversionRate, decUserWeight, decUserMass, decEarthGravAcceleration As Decimal
         Dim decMoonGravAcceleration, decEarthWeight, decMoonWeight As Decimal
         Dim intConversionRate As Integer
@@ -108,7 +108,8 @@ Public Class frmConversionForm
                     decUserMass = Math.Round(decUserMass, 2, MidpointRounding.AwayFromZero)
                     lblOutput2.Text = "(" & decUserMass & " slugs (Mass))"
                     lblOutput2.Show()
-                    System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
+                    'This was helpful code to determine the user's mass before it was printed
+                    'System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
                     decMoonGravAcceleration = CDec(5.3)
                     decMoonWeight = decUserMass * decMoonGravAcceleration
                     decMoonWeight = Math.Round(decMoonWeight, 2, MidpointRounding.AwayFromZero)
@@ -122,7 +123,8 @@ Public Class frmConversionForm
                     decMoonGravAcceleration = CDec(5.3)
                     decUserMass = decUserWeight / decMoonGravAcceleration
                     decUserMass = Math.Round(decUserMass, 2, MidpointRounding.AwayFromZero)
-                    System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
+                    'This code was helpful to determine user's mass before it was printed
+                    'System.Diagnostics.Debug.Write("decUserMass " & decUserMass & vbCrLf)
                     lblOutput2.Text = "(" & decUserMass & " slugs (Mass))"
                     lblOutput2.Show()
                     decEarthGravAcceleration = CDec(32.2)

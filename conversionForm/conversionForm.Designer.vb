@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmConversionForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,12 +20,12 @@ Partial Class frmConversionForm
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.lblID = New System.Windows.Forms.Label()
         Me.lblConversionOptions = New System.Windows.Forms.Label()
         Me.lstConversionOptions = New System.Windows.Forms.ListBox()
-        Me.lblInputDescription = New System.Windows.Forms.Label()
+        Me.lblInstructions = New System.Windows.Forms.Label()
         Me.txtInput = New System.Windows.Forms.TextBox()
         Me.lblOutput = New System.Windows.Forms.Label()
         Me.btnCalculate = New System.Windows.Forms.Button()
@@ -65,14 +65,14 @@ Partial Class frmConversionForm
         Me.lstConversionOptions.Size = New System.Drawing.Size(203, 292)
         Me.lstConversionOptions.TabIndex = 4
         '
-        'lblInputDescription
+        'lblInstructions
         '
-        Me.lblInputDescription.AutoSize = True
-        Me.lblInputDescription.Location = New System.Drawing.Point(58, 121)
-        Me.lblInputDescription.Name = "lblInputDescription"
-        Me.lblInputDescription.Size = New System.Drawing.Size(449, 17)
-        Me.lblInputDescription.TabIndex = 1
-        Me.lblInputDescription.Text = "Select a Conversion Option and Input Your Input Numeric Value Below"
+        Me.lblInstructions.AutoSize = True
+        Me.lblInstructions.Location = New System.Drawing.Point(58, 121)
+        Me.lblInstructions.Name = "lblInstructions"
+        Me.lblInstructions.Size = New System.Drawing.Size(449, 17)
+        Me.lblInstructions.TabIndex = 1
+        Me.lblInstructions.Text = "Select a Conversion Option and Input Your Input Numeric Value Below"
         '
         'txtInput
         '
@@ -95,7 +95,7 @@ Partial Class frmConversionForm
         Me.btnCalculate.Location = New System.Drawing.Point(40, 352)
         Me.btnCalculate.Name = "btnCalculate"
         Me.btnCalculate.Size = New System.Drawing.Size(145, 52)
-        Me.btnCalculate.TabIndex = 8
+        Me.btnCalculate.TabIndex = 9
         Me.btnCalculate.Text = "Calculate"
         Me.btnCalculate.UseVisualStyleBackColor = True
         '
@@ -104,7 +104,7 @@ Partial Class frmConversionForm
         Me.btnClear.Location = New System.Drawing.Point(210, 352)
         Me.btnClear.Name = "btnClear"
         Me.btnClear.Size = New System.Drawing.Size(145, 52)
-        Me.btnClear.TabIndex = 9
+        Me.btnClear.TabIndex = 10
         Me.btnClear.Text = "Clear"
         Me.btnClear.UseVisualStyleBackColor = True
         '
@@ -114,7 +114,7 @@ Partial Class frmConversionForm
         Me.btnExitProgram.Location = New System.Drawing.Point(375, 352)
         Me.btnExitProgram.Name = "btnExitProgram"
         Me.btnExitProgram.Size = New System.Drawing.Size(145, 52)
-        Me.btnExitProgram.TabIndex = 10
+        Me.btnExitProgram.TabIndex = 11
         Me.btnExitProgram.Text = "Exit Program"
         Me.btnExitProgram.UseVisualStyleBackColor = True
         '
@@ -141,7 +141,7 @@ Partial Class frmConversionForm
         Me.lblOutput2.Location = New System.Drawing.Point(337, 257)
         Me.lblOutput2.Name = "lblOutput2"
         Me.lblOutput2.Size = New System.Drawing.Size(170, 17)
-        Me.lblOutput2.TabIndex = 11
+        Me.lblOutput2.TabIndex = 8
         Me.lblOutput2.Text = "Output2 WIll Appear Here"
         Me.lblOutput2.Visible = False
         '
@@ -160,7 +160,7 @@ Partial Class frmConversionForm
         Me.Controls.Add(Me.btnCalculate)
         Me.Controls.Add(Me.lblOutput)
         Me.Controls.Add(Me.txtInput)
-        Me.Controls.Add(Me.lblInputDescription)
+        Me.Controls.Add(Me.lblInstructions)
         Me.Controls.Add(Me.lstConversionOptions)
         Me.Controls.Add(Me.lblConversionOptions)
         Me.Controls.Add(Me.lblID)
@@ -174,7 +174,7 @@ Partial Class frmConversionForm
     Friend WithEvents lblID As Label
     Friend WithEvents lblConversionOptions As Label
     Friend WithEvents lstConversionOptions As ListBox
-    Friend WithEvents lblInputDescription As Label
+    Friend WithEvents lblInstructions As Label
     Friend WithEvents txtInput As TextBox
     Friend WithEvents lblOutput As Label
     Friend WithEvents btnCalculate As Button
