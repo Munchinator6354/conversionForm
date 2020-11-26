@@ -2,18 +2,28 @@
 Option Explicit On
 
 'Program:       conversionForm
-'               Exercise 4 - Feet To Meters
-'               Exercise 5 - Hours To Minutes
-'               Lab 1      - Weight On The Moon
+'               Exercise 4  - Feet To Meters
+'               Exercise 5  - Hours To Minutes
+'               Lab 1       - Weight On The Moon
+'               Exercise 12 - Weight On The Planets
 'Programmer:    Ryan Isaacson / Munchinator6354
-'Date           October 12, 2020
+'Updated:       November 25, 2020
 'Description    Program will convert meters to feet, feet to meters, hours to minutes, and minutes to hours with remainder.
 '               This program is also able to convert a person's Earth Weight to their Moon Weight and the reverse.
+'               This program will also calculate a persons weight on another planet in our solar system (including Pluto) when given their Earth weight.
 
 Public Class frmConversionForm
+    'Subroutine:    lnkGitHub_LinkClicked
+    'Programmer:    Ryan Isaacson / Munchinator6354
+    'Date:          October 25, 2020
+    'Description    Opens link to Programmer GitHub
+    Private Sub lnkGitHub_LinkClicked(sender As Object, e As LinkLabelLinkClickedEventArgs) Handles lnkGitHub.LinkClicked
+        Process.Start("https://github.com/Munchinator6354")
+    End Sub
+
     'Subroutine:    btnCalculate_Click
     'Programmer:    Ryan Isaacson / Munchinator6354
-    'Date:          October 12, 2020
+    'Updated:       November 25, 2020
     'Description    Performs calculation for final output based on the number that the user input  
     '               as well as the conversion form that they chose from the provided list.
     Private Sub btnCalculate_Click(sender As Object, e As EventArgs) Handles btnCalculate.Click
@@ -26,6 +36,9 @@ Public Class frmConversionForm
         Dim strListBoxOption, strUnits, strAnswer, strFinalConversion, strRemainder As String
         Dim lngInput, lngConversionRate As Long
         Dim dblRemainder As Double
+        Dim strPlanets() As String = {"Mercury", "Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"}
+        Dim dblGravityFPerS2() As Double = {11.78, 29.09, 32.17, 12.37, 85.12, 36.34, 34.99, 46.15, 1.38}
+        Dim dblWeightArray(8) As Double
 
         'Perform a check to see if the input was a number
         If Not txtInput.Text.Contains("-") And IsNumeric(txtInput.Text) Then
@@ -48,8 +61,13 @@ Public Class frmConversionForm
 
                 'The following acts as a sort of router: depending on which conversion option the user chose, it sets the conversion rate
 
-                'First the conversion from Feet To Meters
+                '========================================================================================
+                'Conversion from Feet To Meters
+                '========================================================================================
                 If strListBoxOption = "Feet To Meters" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Feet"
                     decConversionRate = CDec(0.3048)
                     decInput = CDec(txtInput.Text)
@@ -58,10 +76,13 @@ Public Class frmConversionForm
                     strUnits = " Meters"
                     strAnswer = CStr(sngSolution)
                     strFinalConversion = strAnswer & strUnits
-                    '----------------------------------------------------------------------------------------
-
-                    'Next the conversion from Meters To Feet
+                    '========================================================================================
+                    'Conversion from Meters To Feet
+                    '========================================================================================
                 ElseIf strListBoxOption = "Meters To Feet" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Meters"
                     decConversionRate = CDec(3.28084)
                     decInput = CDec(txtInput.Text)
@@ -70,10 +91,13 @@ Public Class frmConversionForm
                     strUnits = " Feet"
                     strAnswer = CStr(sngSolution)
                     strFinalConversion = strAnswer & strUnits
-                    '----------------------------------------------------------------------------------------
-
-                    'Next the conversion from Hours To Minutes
+                    '========================================================================================
+                    'Conversion from Hours To Minutes
+                    '========================================================================================
                 ElseIf strListBoxOption = "Hours To Minutes" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Hours"
                     intConversionRate = 60
                     decInput = CDec(txtInput.Text)
@@ -81,10 +105,13 @@ Public Class frmConversionForm
                     strUnits = " Minutes"
                     strAnswer = CStr(sngSolution)
                     strFinalConversion = strAnswer & strUnits
-                    '----------------------------------------------------------------------------------------
-
-                    'Next the conversion from Minutes To Hours
+                    '========================================================================================
+                    'Conversion from Minues To Hours
+                    '========================================================================================
                 ElseIf strListBoxOption = "Minutes To Hours" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Minutes"
                     lngConversionRate = 60
                     lngInput = CLng(txtInput.Text)
@@ -97,10 +124,13 @@ Public Class frmConversionForm
                     strAnswer = CStr(sngSolution)
                     strRemainder = CStr(dblRemainder)
                     strFinalConversion = strAnswer & strUnits & " and " & strRemainder & " Minutes"
-                    '----------------------------------------------------------------------------------------
-
-                    'Next the conversion from Earth Weight To Moon Weight
+                    '========================================================================================
+                    'Conversion from Earth Weight To Moon Weight
+                    '========================================================================================
                 ElseIf strListBoxOption = "Earth Weight To Moon Weight" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Earth Pounds"
                     decUserWeight = CDec(txtInput.Text)
                     decEarthGravAcceleration = CDec(32.2)
@@ -114,10 +144,13 @@ Public Class frmConversionForm
                     decMoonWeight = decUserMass * decMoonGravAcceleration
                     decMoonWeight = Math.Round(decMoonWeight, 2, MidpointRounding.AwayFromZero)
                     strFinalConversion = CStr(decMoonWeight) & " Pounds on the Moon "
-                    '----------------------------------------------------------------------------------------
-
-                    'Next the conversion from Moon Weight To Earth Weight
+                    '========================================================================================
+                    'Conversion from Moon Weight To Earth Weight
+                    '========================================================================================
                 ElseIf strListBoxOption = "Moon Weight To Earth Weight" Then
+                    picSol.Hide()
+                    lblFatPlanet.Hide()
+                    lstPlanetaryWeights.Hide()
                     lblInputUnits.Text = "Moon Pounds"
                     decUserWeight = CDec(txtInput.Text)
                     decMoonGravAcceleration = CDec(5.3)
@@ -131,8 +164,25 @@ Public Class frmConversionForm
                     decEarthWeight = decUserMass * decEarthGravAcceleration
                     decEarthWeight = Math.Round(decEarthWeight, 2, MidpointRounding.AwayFromZero)
                     strFinalConversion = CStr(decEarthWeight) & " Pounds on the Earth"
+                    '========================================================================================
+                    'Conversion from Earth Weight to Planetary Weights
+                    '========================================================================================
+                ElseIf strListBoxOption = "Earth Weight To Planetary Weights" Then
+                    lstPlanetaryWeights.Items.Clear()
+                    lblInputUnits.Text = "Pounds"
+                    picSol.Show()
+                    lblFatPlanet.Show()
+                    lstPlanetaryWeights.Show()
+                    decUserWeight = CDec(txtInput.Text)
+                    decUserMass = CDec((decUserWeight) / 32.17)
+                    decUserMass = Math.Round(decUserMass, 2, MidpointRounding.AwayFromZero)
 
-                    '----------------------------------------------------------------------------------------
+                    For i = 0 To strPlanets.Length - 1
+                        dblWeightArray(i) = (CDbl(decUserMass) * dblGravityFPerS2(i))
+                        dblWeightArray(i) = Math.Round(dblWeightArray(i), 2, MidpointRounding.AwayFromZero)
+                        lstPlanetaryWeights.Items.Add(strPlanets(i) & ": " & dblWeightArray(i) & " lbs")
+                    Next
+
                 End If
             End If
             'Display whichever final conversion came out of the router to the user
@@ -162,6 +212,9 @@ Public Class frmConversionForm
         lblOutput.Text = "Output Will Appear Here"
         lblOutput2.Text = ""
         lstConversionOptions.SelectedIndex = -1
+        picSol.Hide()
+        lblFatPlanet.Hide()
+        lstPlanetaryWeights.Hide()
         txtInput.Focus()
     End Sub
 
@@ -172,4 +225,5 @@ Public Class frmConversionForm
     Private Sub btnExitProgram_Click(sender As Object, e As EventArgs) Handles btnExitProgram.Click
         Me.Close()
     End Sub
+
 End Class
